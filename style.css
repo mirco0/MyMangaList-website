@@ -1,0 +1,23 @@
+
+.grid-item {
+  --ripple_dark: #b980ff;
+  --item_background_dark: #262626;
+  --textColor_dark: #EEEEEE;
+  --unselected_dark: #222222;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    background-color: var(--ripple_dark);
+  }
+
+  .grid-item {
+    background-color: var(--item_background_dark);
+    width : 20vh;
+    height: 20vh;
+    border: 2px solid rgba(0, 0, 0, 0.8);
+    font-size: 15vh;
+    text-align: center;
+    vertical-align: middle;
+  }
