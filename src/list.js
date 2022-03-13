@@ -18,7 +18,7 @@ function getData(user){
     const db = getDatabase(firebaseConfig);
     const mangalist = ref(db, 'users/'+user);
     onValue(mangalist, (snapshot) => {
-        dataOrigin = snapshot.val();
+        const dataOrigin = snapshot.val();
         if(dataOrigin){
             data = dataOrigin;
             drawData(data);
@@ -33,6 +33,7 @@ function getData(user){
 
 function saveData(index){
     sessionStorage.setItem("data",data[index].Data);
+    sessionStorage.setItem("key",index);
     window.location.href = 'mangalist.html' + '#' + data[index].Name; 
 }
 function drawData(datas){

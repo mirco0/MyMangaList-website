@@ -8,8 +8,10 @@ window.onbeforeunload = function (e) {
     return ' ';
   }
 };
+window.onclick = checkforsave;
 
 let data = [];
+let dataOrigin = [];
 
 function init(){
     initUI();
@@ -24,15 +26,21 @@ function initUI(){
 
 function loadData(){
   const datast = sessionStorage.getItem("data");
-  console.log(datast);
   for(let i = 0; i<datast.length; i++){
     data[i] = ~~datast.charAt(i);
   }
+  dataOrigin = [...data];
 }
 
-function saveData(){}
+function saveData(){
+  const id = sessionStorage.getItem("user");
+  putData(id,data);
+  dataOrigin = [...data];
+  console.log("tried to save");
+}
+
 function toggleItem(object,index){
-  data[index] = !data[index];
+  data[index] = +!data[index];
   setColor(object,index);
 }
 function setColor(object,index){
@@ -53,6 +61,10 @@ function generateTable(cols){
     }
 }
 
+function checkforsave(){
+    document.getElementById("savebutton").style.visibility = isDataChanged()? "visible":"hidden";
+}
+
 function isDataChanged(){
-  return sessionStorage.getItem("data") === data;
+  return JSON.stringify(dataOrigin) !== JSON.stringify(data);
 }
