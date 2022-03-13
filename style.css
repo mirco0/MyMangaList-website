@@ -3,13 +3,17 @@ body {
   margin: 0 !important;
   padding: 0 !important;
 }
-
+@font-face {
+  font-family: Roboto;
+  src: url("assets\Roboto-Bold.ttf");
+}
 :root {
 --ripple_dark: #b980ff;
 --item_background_dark: #121212;
 --textColor_dark: #EEEEEE;
 --unselected_dark: #222222;
 --selected_dark: #BB86FC;
+--selected_dark2: #86bdfc;
 --border-width: 0.5px;
 }
 
@@ -17,14 +21,26 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
+.title{
+  height: 0px;
+  color: white;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  font-weight: bold;
+  font-family: Roboto;
+  font-size: x-large;
+}
 .grid-item {
   background-color: var(--unselected_dark);
   width: calc(20vw - var(--border-width)*2);
   height: calc(20vw - var(--border-width)*2);
   border: var(--border-width) solid rgba(0, 0, 0);
+  font-family: Roboto;
   font-size: 4vw;
-  font-weight: bold;
+  font-weight: normal;
   display: flex;
   justify-content: center;
   align-items: center;

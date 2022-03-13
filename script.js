@@ -2,7 +2,7 @@ window.onload = init;
 let data = [];
 
 function init(){
-    loadData("");
+    loadData("100000000000000000000000000000000000000000101");
     generateTable(data.length);
 }
 
@@ -18,7 +18,7 @@ function toggleItem(object,index){
 }
 function setColor(object,index){
   let color;
-  data[index] == 1? color = "--selected_dark" : color = "--unselected_dark";
+  data[index] == 1? color = "--selected_dark2" : color = "--unselected_dark";
   object.style.background = window.getComputedStyle(document.documentElement).getPropertyValue(color);
 }
 function generateTable(cols){
