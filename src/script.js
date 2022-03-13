@@ -2,10 +2,15 @@ window.onload = init;
 let data = [];
 
 function init(){
-    loadData("100000000000000000000000000000000000000000101");
+    initUI();
+    loadData("");
     generateTable(data.length);
 }
+function initUI(){
+  var title = window.location.hash.substring(1);
+  document.getElementById("title").innerHTML = title;
 
+}
 function loadData(datast){
   for(let i = 0; i<datast.length; i++){
     data[i] = ~~datast.charAt(i);
@@ -18,7 +23,7 @@ function toggleItem(object,index){
 }
 function setColor(object,index){
   let color;
-  data[index] == 1? color = "--selected_dark2" : color = "--unselected_dark";
+  data[index] == 1? color = "--selected_dark" : color = "--unselected_dark";
   object.style.background = window.getComputedStyle(document.documentElement).getPropertyValue(color);
 }
 function generateTable(cols){
