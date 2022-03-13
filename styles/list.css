@@ -1,0 +1,55 @@
+body {
+    background-color: var(--item_background_dark);
+    margin: 0 !important;
+    padding: 4px !important;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("assets\Roboto-regular.ttf");
+    }
+
+:root {
+    --ripple_dark: #b980ff;
+    --item_background_dark: #121212;
+    --textColor_dark: #EEEEEE;
+    --unselected_dark: #222222;
+    --selected_dark: #BB86FC;
+    --selected_dark2: #86bdfc;
+    --border-width: 0.5px;
+}
+.actionbar{
+    color: white;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 20px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.actionbar::before{
+    color: white;
+    position: absolute;
+    content: "MyMangaList";
+    left: 0;
+    margin-left: 10px;
+    font-size: .6em;
+    font-family: Roboto;
+    font-weight: 400;
+}
+.list-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 2em;
+
+    margin: 5px 0px 5px 0px;
+    height: 70px;
+    border-radius: 16pt;
+    
+    color: white;
+    background-color: var(--unselected_dark);
+
+}
