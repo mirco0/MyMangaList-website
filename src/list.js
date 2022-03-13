@@ -11,14 +11,16 @@ const firebaseConfig = initializeApp({
 });
 
 var profile = window.location.hash.substring(1);
+var data;
 getData(profile);
-
+document.getElementById("add_button").addEventListener("click", createRipple);
 function getData(user){
     const db = getDatabase(firebaseConfig);
     const mangalist = ref(db, 'users/'+user);
     onValue(mangalist, (snapshot) => {
-        const data = snapshot.val();
-        if(data){
+        dataOrigin = snapshot.val();
+        if(dataOrigin){
+            data = dataOrigin;
             drawData(data);
         }else{
             console.log("Page not found");
@@ -28,13 +30,25 @@ function getData(user){
         onlyOnce: true
     });
 }
-function drawData(data){
-    console.log(data);
+
+function saveData(index){
+    sessionStorage.setItem("data",data[index].Data);
+    window.location.href = 'mangalist.html' + '#' + data[index].Name; 
+}
+function drawData(datas){
     var root = document.getElementById("list");
-    for(let i = 1; i<data.length; i++){
+    for(let i = 1; i<datas.length; i++){
         var object = document.createElement("div");
-        object.innerHTML = data[i].Name + " " + data[i].Data;
+        object.textContent = datas[i].Name;
         object.className = "list-item"
+        object.addEventListener('click', function(){
+            var child = this;
+            var parent = child.parentNode;
+            var index = Array.prototype.indexOf.call(parent.children, child);
+            saveData(index+1);
+        });
+        object.addEventListener('click',createRipple);
+        
         root.appendChild(object);
     }
 }
