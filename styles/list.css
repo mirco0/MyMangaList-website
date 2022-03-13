@@ -5,7 +5,7 @@ body {
 }
 
 :root {
-    --ripple_dark: #b980ff;
+    --ripple_dark: #b980ff80;
     --item_background_dark: #121212;
     --textColor_dark: #EEEEEE;
     --unselected_dark: #222222;
@@ -59,7 +59,7 @@ span.ripple{
     border-radius: 50%;
     transform: scale(0);
     animation: ripple 600ms linear;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: var(--ripple_dark);
 }
 
 @keyframes ripple {

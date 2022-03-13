@@ -34,7 +34,7 @@ function getData(user){
 function saveData(index){
     sessionStorage.setItem("data",data[index].Data);
     sessionStorage.setItem("key",index);
-    window.location.href = 'mangalist.html' + '#' + data[index].Name; 
+    setTimeout(() => { window.location.href = 'mangalist.html' + '#' + data[index].Name; }, 150);
 }
 function drawData(datas){
     var root = document.getElementById("list");
