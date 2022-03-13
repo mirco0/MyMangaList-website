@@ -24,6 +24,8 @@ function getData(user){
             console.log("Page not found");
             //load Page not founds
         }
+    }, {
+        onlyOnce: true
     });
 }
 function drawData(data){
@@ -32,6 +34,7 @@ function drawData(data){
     for(let i = 1; i<data.length; i++){
         var object = document.createElement("div");
         object.innerHTML = data[i].Name + " " + data[i].Data;
+        object.className = "list-item"
         root.appendChild(object);
     }
 }
