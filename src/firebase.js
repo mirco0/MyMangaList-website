@@ -15,8 +15,8 @@ const db = getDatabase(firebaseConfig);
 window.putData = function putData(id, data){
     const key = sessionStorage.getItem("key");
     const updates = {};
-    updates['users/'+id+'/'+ key + '/Data'] = data.toString().replaceAll(",","");
-    console.log('users/'+id+'/'+ key + '/Data');
+    let formattedData = data.toString().replaceAll(",","");
+    updates['users/'+id+'/'+ key + '/Data'] = formattedData;
     update(ref(db), updates);
-    console.log("saved?");
+    sessionStorage.setItem("data",formattedData);
 }
