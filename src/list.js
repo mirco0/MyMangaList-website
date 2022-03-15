@@ -14,6 +14,8 @@ var profile = window.location.hash.substring(1);
 var data;
 getData(profile);
 document.getElementById("add_button").addEventListener("click", createRipple);
+document.getElementById("add_button").addEventListener("click", addManga);
+
 function getData(user){
     const db = getDatabase(firebaseConfig);
     const mangalist = ref(db, 'users/'+user);
@@ -35,6 +37,9 @@ function saveData(index){
     sessionStorage.setItem("data",data[index].Data);
     sessionStorage.setItem("key",index);
     setTimeout(() => { window.location.href = 'mangalist.html' + '#' + data[index].Name; }, 150);
+}
+function addManga(){
+    
 }
 function drawData(datas){
     var root = document.getElementById("list");

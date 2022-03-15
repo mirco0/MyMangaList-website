@@ -1,5 +1,6 @@
 body {
     background-color: var(--item_background_dark);
+    overflow-x: hidden;
     margin: 0 !important;
     padding: 4px !important;
 }
@@ -13,18 +14,37 @@ body {
     --selected_dark2: #86bdfc;
     --border-width: 0.5px;
 }
-.actionbar{
 
-    color: white;
+.actionbar{
+    
     position: relative;
-    font-size: 3em;
-    font-weight: bold;
-    text-align: right;
-    margin-right: 20px;
+    color: white;
+    margin-left: 10px;
+    height: 55.2px;
+    font-size: 1.8em;
+    font-family: Roboto;
+    font-weight: 400;
     display: flex;
-    justify-content: right;
+    justify-content: left;
     align-items: center;
 }
+.add-button{
+    position: absolute;
+    right: 20px;
+    font-family: initial;
+    font-weight: bold;
+    font-size: 1.6em;
+    overflow: visible;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+/*
 .actionbar::before{
     color: white;
     position: absolute;
@@ -35,7 +55,7 @@ body {
     font-family: Roboto;
     font-weight: 400;
 }
-
+*/
 .list-item{
     position: relative;
     overflow: hidden;
