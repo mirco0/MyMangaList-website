@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   </head>
   <link rel="stylesheet" href="styles/list.css">
+  <link rel="stylesheet" href="styles/add-popup.css">
   <script type="module" src="src/list.js"></script>
   <script src="src/ripple.js"></script>
   <body>
@@ -11,5 +12,16 @@
       <p class="add-button" id="add_button">+</p>
     </div>
     <div class="manga-container" id="list"></div>
+    <div class="popup-out" id="popup">
+      <form class="popup">
+        <label class="title">Aggiungi collezione</label>
+        <br>
+        <input type="text" name="name" id="name-field" class="input-field" placeholder="Aggiungi un nome">
+        <br>
+        <input type="number" name="number" id="collection-number-field"  class="input-field"placeholder="Numero di volumi">
+        <br>
+        <input type="submit" value="AGGIUNGI" id="add-form" class="add-form-button">
+      </form>  
+    </dic>
   </body>
 </html>

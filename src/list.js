@@ -39,7 +39,8 @@ function saveData(index){
     setTimeout(() => { window.location.href = 'mangalist.html' + '#' + data[index].Name; }, 150);
 }
 function addManga(){
-    
+    let popup = document.getElementById("popup");
+    document.body.classList.add("non-scrollable")
 }
 function drawData(datas){
     var root = document.getElementById("list");
