@@ -12,9 +12,15 @@ const firebaseConfig = initializeApp({
 
 var profile = window.location.hash.substring(1);
 var data;
+
+let popup = document.getElementById("popup");
+let add_button = document.getElementById("add_button");
+
 getData(profile);
-document.getElementById("add_button").addEventListener("click", createRipple);
-document.getElementById("add_button").addEventListener("click", addManga);
+add_button.addEventListener("click", createRipple);
+add_button.addEventListener("click", togglePopup);
+popup.addEventListener("click",togglePopup);
+document.getElementById("popup-form").addEventListener("click",cancelPropagation);
 
 function getData(user){
     const db = getDatabase(firebaseConfig);
@@ -26,22 +32,20 @@ function getData(user){
             drawData(data);
         }else{
             console.log("Page not found");
-            //load Page not founds
+            
         }
     }, {
         onlyOnce: true
     });
 }
 
+//DATA
 function saveData(index){
     sessionStorage.setItem("data",data[index].Data);
     sessionStorage.setItem("key",index);
     setTimeout(() => { window.location.href = 'mangalist.html' + '#' + data[index].Name; }, 150);
 }
-function addManga(){
-    let popup = document.getElementById("popup");
-    document.body.classList.add("non-scrollable")
-}
+
 function drawData(datas){
     var root = document.getElementById("list");
     for(let i = 1; i<datas.length; i++){
@@ -58,4 +62,20 @@ function drawData(datas){
         
         root.appendChild(object);
     }
+}
+
+//POPUP
+function togglePopup(){
+
+    let name = popup.className == "popup-in"? "popup-out": "popup-in";
+    popup.className = name;
+    document.body.classList.toggle("non-scrollable");
+}
+
+function addManga(){
+
+}
+
+function cancelPropagation(e){
+    e.stopPropagation();
 }
