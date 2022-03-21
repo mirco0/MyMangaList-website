@@ -16,7 +16,6 @@ body {
 }
 
 .actionbar{
-    
     position: relative;
     color: white;
     margin-left: 10px;
@@ -29,6 +28,7 @@ body {
     align-items: center;
 }
 .add-button{
+    cursor: pointer;
     position: absolute;
     right: 20px;
     font-family: initial;
@@ -44,18 +44,6 @@ body {
     user-select: none;
 
 }
-/*
-.actionbar::before{
-    color: white;
-    position: absolute;
-    content: "MyMangaList";
-    left: 0;
-    margin-left: 10px;
-    font-size: .6em;
-    font-family: Roboto;
-    font-weight: 400;
-}
-*/
 .list-item{
     position: relative;
     overflow: hidden;

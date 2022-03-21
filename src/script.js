@@ -33,7 +33,7 @@ function loadData(){
 }
 
 function saveData(){
-  const id = sessionStorage.getItem("user");
+  const id = localStorage.getItem("user");
   putData(id,data);
   dataOrigin = [...data];
   console.log("tried to save");

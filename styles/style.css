@@ -11,7 +11,8 @@ body {
 --unselected_dark: #222222;
 --selected_dark: #BB86FC;
 --selected_dark2: #86bdfc;
---border-width: 0.5px;
+--border-width: 0.5px; 
+--square-size: calc(20vw - var(--border-width)*4);
 }
 
 .grid-container {
@@ -33,6 +34,7 @@ body {
 }
 
 .save-button{
+  cursor: pointer;
   top: 0;
   right: 20px;
   display: flex;
@@ -49,8 +51,8 @@ body {
 
 .grid-item {
   background-color: var(--unselected_dark);
-  width: calc(20vw - var(--border-width)*2);
-  height: calc(20vw - var(--border-width)*2);
+  width: var(--square-size);
+  height: var(--square-size);
   border: var(--border-width) solid rgba(0, 0, 0);
   font-family: Roboto;
   font-size: 4vw;
@@ -63,4 +65,8 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
