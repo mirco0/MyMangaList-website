@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
 
 const firebaseConfig = initializeApp({
     apiKey: "AIzaSyCQro-kkRNm58eDJeJgSea3gTj6Q__QzxM",
@@ -14,9 +14,13 @@ var profile = window.location.hash.substring(1);
 var data;
 
 let popup = document.getElementById("popup");
-let add_button = document.getElementById("add_button");
+let popupform = document.getElementById("popup-form");
+let add_button = document.getElementById("add-button");
+let form_add = document.getElementById("add-form");
 
 getData(profile);
+
+form_add.addEventListener("click",addManga);
 add_button.addEventListener("click", createRipple);
 add_button.addEventListener("click", togglePopup);
 popup.addEventListener("click",togglePopup);
@@ -66,14 +70,53 @@ function drawData(datas){
 
 //POPUP
 function togglePopup(){
-
-    let name = popup.className == "popup-in"? "popup-out": "popup-in";
+    let name = "popup-in";
+    if( popup.className == "popup-in"){
+        name = "popup-out";
+        clearInput();
+    }
     popup.className = name;
     document.body.classList.toggle("non-scrollable");
 }
 
+function clearInput(){
+    for (let i = 0; i < popupform.childNodes.length; i++) {
+        var e = popupform.childNodes[i];
+        if(e.className == "input-field")
+            e.value = "";
+    }
+}
 function addManga(){
+    var name = document.getElementById("name-field").value;
+    var length = document.getElementById("collection-number-field").value;
+    
+    const db = getDatabase(firebaseConfig);
+    const mangalist = ref(db, 'users/'+ profile);
+    let dataL = parseInt(length)+1;
+    const postData = {
+        Name: name,
+        Data: Array(dataL).join("0")
+    };
+    
+    onValue(mangalist, (snapshot) => {
+        let key = snapshot.val().length;
+        updateData(mangalist,postData,key);
+    }, {
+        onlyOnce: true
+    });
+    togglePopup();
+}
 
+function updateData(ref,new_data,key){
+    var updates = {};
+    
+    let updatedData = [];
+    updatedData[1] = new_data;
+    data.push(new_data);
+    updates["/"+key] = new_data; 
+    update(ref,updates);
+    
+    drawData(updatedData);
 }
 
 function cancelPropagation(e){
