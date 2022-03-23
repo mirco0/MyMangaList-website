@@ -11,8 +11,8 @@ body {
 --unselected_dark: #222222;
 --selected_dark: #BB86FC;
 --selected_dark2: #86bdfc;
---border-width: 0.5px; 
---square-size: calc(20vw - var(--border-width)*4);
+--border-width: 0.5px;
+--square-size: calc(20vw - 1);
 }
 
 .grid-container {
@@ -52,7 +52,7 @@ body {
 .grid-item {
   background-color: var(--unselected_dark);
   width: var(--square-size);
-  height: var(--square-size);
+  aspect-ratio: 1 / 1;
   border: var(--border-width) solid rgba(0, 0, 0);
   font-family: Roboto;
   font-size: 4vw;
