@@ -11,7 +11,8 @@ body {
 --unselected_dark: #222222;
 --selected_dark: #BB86FC;
 --selected_dark2: #86bdfc;
---border-width: 0.5px;
+--border-width: 0.5px; 
+--border: 1px; 
 --square-size: calc(20vw - 1);
 }
 
