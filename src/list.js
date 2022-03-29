@@ -55,6 +55,10 @@ function drawData(datas){
     for(let i = 1; i<datas.length; i++){
         var object = document.createElement("div");
         object.textContent = datas[i].Name;
+        let data = datas[i].Data;
+        let selected = data.split("1").length - 1;
+        let total = data.length;
+        object.setAttribute('data-value', selected+"/"+total);
         object.className = "list-item"
         object.addEventListener('click', function(){
             var child = this;
@@ -63,9 +67,9 @@ function drawData(datas){
             saveData(index+1);
         });
         object.addEventListener('click',createRipple);
-        
         root.appendChild(object);
     }
+
 }
 
 //POPUP

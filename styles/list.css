@@ -30,6 +30,7 @@ body {
 .add-button{
     cursor: pointer;
     position: absolute;
+    margin: 0;
     right: 20px;
     font-family: initial;
     font-weight: bold;
@@ -76,3 +77,15 @@ span.ripple{
       opacity: 0;
     }
   }
+
+::-webkit-scrollbar {
+    display: none;
+}
+.list-item::after {
+   position: absolute;
+   content: attr(data-value);
+   font-size: medium;
+
+   right: 0;
+   margin-right: 20px;
+}
