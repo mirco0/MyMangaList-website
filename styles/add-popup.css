@@ -29,7 +29,6 @@
     bottom: 0;
     left: 0;
     background-color: var(--overlay);
-    /* animation: popup_in 100ms ease-in; */
 }
 
 .popup{
@@ -58,7 +57,7 @@
     -webkit-user-select: none;
     -o-user-select: none;
     overflow: hidden;
-
+    animation: popup_in 180ms cubic-bezier(0.08, 0.82, 0.2, 1.08);
 }
 
 .title{
@@ -122,29 +121,12 @@
 }
 
 .add-form-button:hover{
-    all: unset;
-
-    position: absolute;
-    height: 21.4%;
-    width: 60.7%;
-    bottom: 7.15%;
-    
-    
-    right: 0;
-    left:  0;
-    margin-left: auto;
-    margin-right: auto;
-    
-    border-radius: 8px;
-    
-
-    font-size: calc(var(--vw) * 4.5);
-
-    font-family: Roboto;
-    font-weight: bold;
-    color: #E6E6E6;
-    cursor: pointer;
     background-color: #bb86fcbe;
+    box-shadow: 0px 10px 5px #222222;
+}
+
+.add-form-button:focus{
+    background-color: #bb86fcee;
     box-shadow: 0px 10px 5px #222222;
 }
 
@@ -157,17 +139,14 @@
 input[type="number"]{
     margin-top: 2%;
 }
-/* 
+
 @keyframes popup_in {
-    to {
-        transform: scale(0);
+    from {
+        transform: translate(0%, -50%) scale(0);
         opacity: 0;
+    }
+    to {
+        transform: translate(0%, -50%) scale(1);
+        opacity: 100;
       }
 }
-
-@keyframes popup_out {
-    to {
-        transform: scale(0);
-        opacity: 0;
-      }
-} */
