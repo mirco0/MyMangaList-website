@@ -33,8 +33,13 @@ function loadData(){
 }
 
 function saveData(){
-  const id = localStorage.getItem("user");
-  putData(id,data);
+  let id;
+  if(local()){
+    id = localStorage.getItem("user");
+  }else{
+    id = sessionStorage.getItem("user");
+  }
+    putData(id,data);
   dataOrigin = [...data];
   console.log("tried to save");
 }
@@ -67,4 +72,15 @@ function checkforsave(){
 
 function isDataChanged(){
   return JSON.stringify(dataOrigin) !== JSON.stringify(data);
+}
+
+function local(){
+  var test = 'storage';
+  try {
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+  } catch(e) {
+      return false;
+  }
 }
