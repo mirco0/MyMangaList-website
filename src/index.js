@@ -7,7 +7,7 @@ function getCode(){
       if(local()){
         localStorage.setItem("user",person);
       }else{
-        sessionStorage.setItem("user",person);
+        createCookie(person);
       }
     }
 }
@@ -21,4 +21,7 @@ function local(){
   } catch(e) {
       return false;
   }
+}
+function createCookie(data){
+  document.cookie = "user=${data}; expires= Tue 2038-01-19, 03:13:08 UTC";
 }

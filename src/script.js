@@ -37,7 +37,7 @@ function saveData(){
   if(local()){
     id = localStorage.getItem("user");
   }else{
-    id = sessionStorage.getItem("user");
+    id = getCookie("user");
   }
     putData(id,data);
   dataOrigin = [...data];
@@ -83,4 +83,10 @@ function local(){
   } catch(e) {
       return false;
   }
+}
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
 }
