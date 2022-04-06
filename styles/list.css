@@ -81,11 +81,18 @@ span.ripple{
 ::-webkit-scrollbar {
     display: none;
 }
-.list-item::after {
-   position: absolute;
-   content: attr(data-value);
-   font-size: medium;
+.counter {
+    position: absolute;
+    font-size: medium;
+    cursor: pointer;
+    right: 0;
+    margin-right: 20px;
 
-   right: 0;
-   margin-right: 20px;
+    -webkit-user-select: none;     
+    -moz-user-select: none;
+    -ms-user-select: none; 
+    user-select: none;
+}
+.counter:hover{
+    color: var(--selected_dark);
 }

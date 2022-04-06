@@ -58,15 +58,24 @@ function drawData(datas){
         let data = datas[i].Data;
         let selected = data.split("1").length - 1;
         let total = data.length;
-        object.setAttribute('data-value', selected+"/"+total);
+        
+        let span = document.createElement("span");
+        span.innerHTML = selected+"/"+total;
+        span.className = "counter";
+
         object.className = "list-item"
         object.addEventListener('click', function(){
             var child = this;
             var parent = child.parentNode;
             var index = Array.prototype.indexOf.call(parent.children, child);
             saveData(index+1);
+
         });
+
         object.addEventListener('click',createRipple);
+        span.addEventListener('click',cancelPropagation);
+        span.addEventListener('click',editManga);
+        object.appendChild(span);
         root.appendChild(object);
     }
 
@@ -122,7 +131,9 @@ function updateData(ref,new_data,key){
     
     drawData(updatedData);
 }
-
+function editManga(){
+    
+}
 function cancelPropagation(e){
     e.stopPropagation();
 }
