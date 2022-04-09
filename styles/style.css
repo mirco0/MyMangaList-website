@@ -67,6 +67,19 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+.back-button{
+  all: unset;
+  color: #b980ff;
+  position: absolute;
+  top: 0;
+  font-size: xx-large;
+  left: 20px;
+  justify-content: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 48px;
+}
 
 ::-webkit-scrollbar {
   display: none;
