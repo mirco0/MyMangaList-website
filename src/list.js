@@ -9,25 +9,37 @@ const firebaseConfig = initializeApp({
     messagingSenderId: "238759107728",
     appId: "1:238759107728:web:f4cf218ec3ae11265e8c15"
 });
+const db = getDatabase(firebaseConfig);
 
 var profile = window.location.hash.substring(1);
-var data;
+var data; 
+var selectedData;
 
 let popup = document.getElementById("popup");
+let add_button = document.getElementById("add-button"); // + (top right)
 let popupform = document.getElementById("popup-form");
-let add_button = document.getElementById("add-button");
-let form_add = document.getElementById("add-form");
+let form_add = document.getElementById("add-form"); 
+
+let popupEdit = document.getElementById("popup-edit");
+let popupformEdit = document.getElementById("popup-form-edit");
+let formEdit = document.getElementById("form-edit");
+let deleteButton = document.getElementById("form-delete-edit");
 
 getData(profile);
 
 form_add.addEventListener("click",addManga);
 add_button.addEventListener("click", createRipple);
-add_button.addEventListener("click", togglePopup);
-popup.addEventListener("click",togglePopup);
-document.getElementById("popup-form").addEventListener("click",cancelPropagation);
+add_button.addEventListener("click", function(){togglePopup(popup);});
+popup.addEventListener("click",function(){togglePopup(popup);});
+
+popupEdit.addEventListener("click", function(){togglePopup(popupEdit);});
+
+popupform.addEventListener("click",cancelPropagation);
+popupformEdit.addEventListener("click",cancelPropagation);
+deleteButton.addEventListener("click",deleteManga);
 
 function getData(user){
-    const db = getDatabase(firebaseConfig);
+    
     const mangalist = ref(db, 'users/'+user);
     onValue(mangalist, (snapshot) => {
         const dataOrigin = snapshot.val();
@@ -54,6 +66,7 @@ function drawData(datas){
     var root = document.getElementById("list");
     for(let i = 1; i<datas.length; i++){
         var object = document.createElement("div");
+        if(datas[i].Data == null){console.log("DIO");continue};
         object.textContent = datas[i].Name;
         let data = datas[i].Data;
         let selected = data.split("1").length - 1;
@@ -65,16 +78,13 @@ function drawData(datas){
 
         object.className = "list-item"
         object.addEventListener('click', function(){
-            var child = this;
-            var parent = child.parentNode;
-            var index = Array.prototype.indexOf.call(parent.children, child);
-            saveData(index+1);
-
+            saveData(i);
         });
 
         object.addEventListener('click',createRipple);
         span.addEventListener('click',cancelPropagation);
-        span.addEventListener('click',editManga);
+        span.addEventListener('click',function(){ selectedData = i; fillPopupFields(); });
+        span.addEventListener('click',function(){togglePopup(popupEdit);});
         object.appendChild(span);
         root.appendChild(object);
     }
@@ -82,17 +92,23 @@ function drawData(datas){
 }
 
 //POPUP
-function togglePopup(){
+function togglePopup(element){
     let name = "popup-in";
-    if( popup.className == "popup-in"){
+    if( element.className == "popup-in"){
         name = "popup-out";
-        clearInput();
+        clearInput(element.childNodes[1]);
     }
-    popup.className = name;
+    element.className = name;
     document.body.classList.toggle("non-scrollable");
 }
+function fillPopupFields(){
+    let collectionName = document.getElementById("name-field-edit");
+    let collectionLength = document.getElementById("collection-number-field-edit");
 
-function clearInput(){
+    collectionName.value = data[selectedData].Name;
+    collectionLength.value = data[selectedData].Data.length;
+}
+function clearInput(popupform){
     for (let i = 0; i < popupform.childNodes.length; i++) {
         var e = popupform.childNodes[i];
         if(e.className == "input-field")
@@ -103,7 +119,7 @@ function addManga(){
     var name = document.getElementById("name-field").value;
     var length = document.getElementById("collection-number-field").value;
     
-    const db = getDatabase(firebaseConfig);
+    
     const mangalist = ref(db, 'users/'+ profile);
     let dataL = parseInt(length)+1;
     const postData = {
@@ -117,7 +133,7 @@ function addManga(){
     }, {
         onlyOnce: true
     });
-    togglePopup();
+    togglePopup(popup);
 }
 
 function updateData(ref,new_data,key){
@@ -131,8 +147,20 @@ function updateData(ref,new_data,key){
     
     drawData(updatedData);
 }
-function editManga(){
-    
+
+function editManga(newName, newData){
+    if(newName != null){}
+}
+function deleteManga(){
+    let updates = {
+        Name: "",
+        Data: null
+    };
+    update(ref(db, 'users/'+ profile + "/" + (selectedData)),updates);
+    console.log(selectedData);
+    togglePopup(popupEdit);
+    var child = document.getElementById("list").childNodes[selectedData];
+    child.parentNode.removeChild(child);
 }
 function cancelPropagation(e){
     e.stopPropagation();

@@ -22,8 +22,21 @@
         <br>
         <input type="number" name="number" id="collection-number-field"  class="input-field" placeholder="Numero di volumi">
         <br>
-        <input type="button" value="AGGIUNGI" id="add-form" class="add-form-button">
+        <input type="button" value="AGGIUNGI" id="add-form" class="form-button add-form-button" >
       </form>  
-    </dic>
+    </div>
+    <div class="popup-out" id="popup-edit">
+      <form autocomplete="off" class="popup" id="popup-form-edit" >
+        <label class="title">Modifica collezione</label>
+        <br>
+        <input type="text" name="name" id="name-field-edit" class="input-field" placeholder="Aggiungi un nome">
+        <br>
+        <input type="number" name="number" id="collection-number-field-edit"  class="input-field" placeholder="Numero di volumi">
+        <br>
+        <input type="button" value="ELIMINA" id="form-delete-edit" class="form-button delete-form-button">
+        <br>
+        <input type="button" value="MODIFICA" id="form-edit" class="form-button add-form-button">
+      </form>  
+    </div>
   </body>
 </html>

@@ -43,7 +43,7 @@
     margin-left: auto;
     margin-right: auto;
 
-    height: calc(var(--vw) * 70);
+    height: calc(var(--vw) * 70); 
     width: calc(var(--vw) * 70);
     max-height: 500px;
     max-width: 500px;
@@ -93,40 +93,44 @@
     width: 71.5%;
     font-size: calc(var(--vw) * 3.5);
 }
-
-.add-form-button{
+.form-button{
     all: unset;
-
     position: absolute;
-    height: 21.4%;
-    width: 60.7%;
-    bottom: 7.15%;
-    
-    
     right: 0;
     left:  0;
     margin-left: auto;
     margin-right: auto;
-    
-    border-radius: 8px;
-    
-
-    font-size: calc(var(--vw) * 4.5);
-
     font-family: Roboto;
     font-weight: bold;
     color: #E6E6E6;
     cursor: pointer;
+    border-radius: 8px;
+}
+
+.add-form-button{
+    height: 21.4%;
+    width: 60.7%;
+    bottom: 7.15%;
+    font-size: calc(var(--vw) * 4.5);
+    
     background-color: #BB86FC;
 }
 
-.add-form-button:hover{
-    background-color: #bb86fcbe;
+.delete-form-button{
+    height: 10.7%;
+    width: 30.35%;
+    bottom: 29.5%;
+    font-size: calc(var(--vw) * 2.25);
+    background-color: #f04343;
+}
+
+.form-button:hover{
+    opacity: 0.9;
     box-shadow: 0px 10px 5px #222222;
 }
 
-.add-form-button:focus{
-    background-color: #bb86fcee;
+.form-button:focus{
+    opacity: 1;
     box-shadow: 0px 10px 5px #222222;
 }
 
