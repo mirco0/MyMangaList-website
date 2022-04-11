@@ -69,7 +69,7 @@ body {
 }
 .back-button{
   all: unset;
-  color: #b980ff;
+  color: #fff;
   position: absolute;
   top: 0;
   font-size: xx-large;
@@ -79,6 +79,7 @@ body {
   display: flex;
   align-items: center;
   height: 48px;
+  font-family: Roboto;
 }
 
 ::-webkit-scrollbar {
