@@ -12,6 +12,7 @@ const firebaseConfig = initializeApp({
 const db = getDatabase(firebaseConfig);
 
 var profile = window.location.hash.substring(1);
+let originalChilds = [];
 var data; 
 var selectedData;
 
@@ -66,7 +67,10 @@ function drawData(datas){
     var root = document.getElementById("list");
     for(let i = 1; i<datas.length; i++){
         var object = document.createElement("div");
-        if(datas[i].Data == null){console.log("DIO");continue};
+        if(datas[i].Data == null){
+            originalChilds.push(0);
+            continue;
+        };
         object.textContent = datas[i].Name;
         let data = datas[i].Data;
         let selected = data.split("1").length - 1;
@@ -86,9 +90,9 @@ function drawData(datas){
         span.addEventListener('click',function(){ selectedData = i; fillPopupFields(); });
         span.addEventListener('click',function(){togglePopup(popupEdit);});
         object.appendChild(span);
+        originalChilds.push(object);
         root.appendChild(object);
     }
-
 }
 
 //POPUP
@@ -157,9 +161,8 @@ function deleteManga(){
         Data: null
     };
     update(ref(db, 'users/'+ profile + "/" + (selectedData)),updates);
-    console.log(selectedData);
     togglePopup(popupEdit);
-    var child = document.getElementById("list").childNodes[selectedData];
+    var child = originalChilds[selectedData-1];
     child.parentNode.removeChild(child);
 }
 function cancelPropagation(e){
