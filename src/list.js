@@ -34,7 +34,11 @@ add_button.addEventListener("click", function(){togglePopup(popup);});
 popup.addEventListener("click",function(){togglePopup(popup);});
 
 popupEdit.addEventListener("click", function(){togglePopup(popupEdit);});
-
+formEdit.addEventListener("click",function(){
+    let collectionName = document.getElementById("name-field-edit").value;
+    let collectionLength = document.getElementById("collection-number-field-edit").value;
+    editManga(collectionName,collectionLength); 
+    });
 popupform.addEventListener("click",cancelPropagation);
 popupformEdit.addEventListener("click",cancelPropagation);
 deleteButton.addEventListener("click",deleteManga);
@@ -152,19 +156,45 @@ function updateData(ref,new_data,key){
     drawData(updatedData);
 }
 
-function editManga(newName, newData){
-    if(newName != null){}
+function editManga(newName, newDataLen){
+    let sel = data[selectedData];
+    if(newName == null ) return;
+    if(newDataLen == NaN ) return;
+    let newData = sel.Data;
+
+    if(newDataLen > sel.Data.length){
+      newData += Array(newDataLen-newData.length+1).join("0");
+    }else{
+      newData = newData.substring(0,newDataLen);
+    }
+    editData(newName,newData);
+
+    let selected = newData.split("1").length - 1;
+    let total = newData.length;       
+    var listItem = originalChilds[selectedData-1];
+    var spanChild = listItem.childNodes[1]; 
+    listItem.textContent = newName;
+    listItem.appendChild(spanChild);
+    spanChild.textContent = selected+"/"+total;
+
 }
+
 function deleteManga(){
-    let updates = {
-        Name: "",
-        Data: null
-    };
-    update(ref(db, 'users/'+ profile + "/" + (selectedData)),updates);
-    togglePopup(popupEdit);
+    editData("",null);
     var child = originalChilds[selectedData-1];
     child.parentNode.removeChild(child);
 }
+
+function editData(Name, Data){
+    let updates = {
+        Name: Name,
+        Data: Data
+    };
+    update(ref(db, 'users/'+ profile + "/" + (selectedData)),updates);
+    togglePopup(popupEdit);
+    data[selectedData] = updates;
+}
+
 function cancelPropagation(e){
     e.stopPropagation();
 }
