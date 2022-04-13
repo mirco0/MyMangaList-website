@@ -1,5 +1,5 @@
 body {
-    background-color: var(--item_background_dark);
+    background-color: var(--background_dark);
     overflow-x: hidden;
     margin: 0 !important;
     padding: 4px !important;
@@ -7,7 +7,7 @@ body {
 
 :root {
     --ripple_dark: #b980ff80;
-    --item_background_dark: #121212;
+    --background_dark: #121212;
     --textColor_dark: #EEEEEE;
     --unselected_dark: #222222;
     --selected_dark: #BB86FC;
