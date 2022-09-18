@@ -1,27 +1,16 @@
-window.onload = getCode; 
-
-function getCode(){
-    let person = prompt("Codice Lista Manga");
-    if (person != null) {
-      window.location.href = 'list.html' + '#' + person;
-      if(local()){
-        localStorage.setItem("user",person);
-      }else{
-        createCookie(person);
-      }
+window.onload = onLoad;
+document.getElementById("logo").onclick = function(){
+    window.location.href = "login.html";
+}
+function onLoad(){
+    var login = document.getElementById("login");
+    login.onclick = { };
+    if(loggedIn()){
+        document.getElementById("profile-picture").style.visibility = "visible";
+        login.style.visibility = "hidden";
     }
 }
 
-function local(){
-  var test = 'storage';
-  try {
-      localStorage.setItem(test, test);
-      localStorage.removeItem(test);
-      return true;
-  } catch(e) {
-      return false;
-  }
-}
-function createCookie(data){
-  document.cookie = "user=${data}; expires= Tue 2038-01-19, 03:13:08 UTC";
+function loggedIn(){
+    return !true;
 }

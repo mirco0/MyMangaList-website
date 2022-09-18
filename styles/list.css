@@ -19,6 +19,7 @@ body {
     position: relative;
     color: white;
     margin-left: 10px;
+    margin-right: 10px;
     height: 55.2px;
     font-size: 1.8em;
     font-family: Roboto;
@@ -29,9 +30,9 @@ body {
 }
 .add-button{
     cursor: pointer;
-    position: absolute;
-    margin: 0;
-    right: 20px;
+    position: relative;
+    margin-left: auto; 
+    margin-right: 20px;
     font-family: initial;
     font-weight: bold;
     font-size: 1.6em;
@@ -43,7 +44,33 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+.logo{
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.logo:hover{
+    color: var(--selected_dark);
+}
+.profile-picture{
+    height: 70%;
+    aspect-ratio : 1 / 1;
+    background-color: #bbb;
+    border-radius: 50%;
+    cursor: pointer;
 
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .list-item{
     position: relative;

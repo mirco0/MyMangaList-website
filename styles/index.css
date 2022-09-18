@@ -1,0 +1,46 @@
+:root {
+    --ripple_dark: #b980ff80;
+    --background_dark: #121212;
+    --textColor_dark: #EEEEEE;
+    --unselected_dark: #222222;
+    --selected_dark: #BB86FC;
+    --selected_dark2: #86bdfc;
+    --border-width: 0.5px;
+}
+
+.text{
+    margin: 0 20px 0 20px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16vw;
+    line-height: 16vw;
+    color: white;
+    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.profile-picture{
+    visibility: hidden;
+    margin-left: auto; 
+    margin-right: 0;
+}
+.login{
+    color:  var(--selected_dark);
+    visibility: visible;
+    position: absolute;
+    font-size: medium;
+    right: 10px;
+
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
