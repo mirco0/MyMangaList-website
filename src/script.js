@@ -33,12 +33,13 @@ function loadData(){
 }
 
 function saveData(){
-  let id;
   if(local()){
     id = localStorage.getItem("user");
   }else{
     id = getCookie("user");
   }
+  //TO REMOVE
+  id = "SETID";
     putData(id,data);
   dataOrigin = [...data];
   console.log("tried to save");

@@ -16,7 +16,7 @@ window.putData = function putData(id, data){
     const key = sessionStorage.getItem("key");
     const updates = {};
     let formattedData = data.toString().replaceAll(",","");
-    updates['users/'+id+'/'+ key + '/Data'] = formattedData;
+    updates['users/'+id+'/data/'+ key + '/data'] = formattedData;
     update(ref(db), updates);
     sessionStorage.setItem("data",formattedData);
 }

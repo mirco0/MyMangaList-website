@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+import { getDatabase, ref, onValue, push, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
 
 document.getElementById("logo").onclick = function(){
     window.location.href = "index.html";
@@ -15,10 +15,11 @@ const firebaseConfig = initializeApp({
 });
 const db = getDatabase(firebaseConfig);
 
-var profile = window.location.hash.substring(1);
+var profile = "SETID";//window.location.hash.substring(1);
 let originalChilds = [];
 var data; 
 var selectedData;
+let ItemSelectedID;
 
 let popup = document.getElementById("popup");
 let add_button = document.getElementById("add-button"); // + (top right)
@@ -48,16 +49,15 @@ popupformEdit.addEventListener("click",cancelPropagation);
 deleteButton.addEventListener("click",deleteManga);
 
 function getData(user){
-    
-    const mangalist = ref(db, 'users/'+user);
+    console.log("DIOCANE");
+    const mangalist = ref(db, 'users/'+user+"/data");
     onValue(mangalist, (snapshot) => {
-        const dataOrigin = snapshot.val();
+        const dataOrigin = snapshot;
         if(dataOrigin){
             data = dataOrigin;
-            drawData(data);
+            drawData(snapshot);
         }else{
             console.log("Page not found");
-            
         }
     }, {
         onlyOnce: true
@@ -65,44 +65,41 @@ function getData(user){
 }
 
 //DATA
-function saveData(index){
-    sessionStorage.setItem("data",data[index].Data);
-    sessionStorage.setItem("key",index);
-    setTimeout(() => { window.location.href = 'mangalist.html' + '#' + data[index].Name; }, 150);
+function saveData(data,key){
+    sessionStorage.setItem("data",data);
+    sessionStorage.setItem("key",key);
+    setTimeout(() => { window.location.href = 'mangalist.html' + '#' }, 150);
 }
 
-function drawData(datas){
+function drawData(snapshot){
+    console.log(snapshot);
+    snapshot.forEach((child) => {
     var root = document.getElementById("list");
-    for(let i = 1; i<datas.length; i++){
+    
         var object = document.createElement("div");
-        if(datas[i].Data == null){
-            originalChilds.push(0);
-            continue;
-        };
-        object.textContent = datas[i].Name;
-        let data = datas[i].Data;
+        object.textContent = child.val().name;
+        let data = child.val().data;
         let selected = data.split("1").length - 1;
         let total = data.length;
-        
         let span = document.createElement("span");
         span.innerHTML = selected+"/"+total;
         span.className = "counter";
 
         object.className = "list-item"
         object.addEventListener('click', function(){
-            saveData(i);
+            saveData(child.val().data,child.key);
         });
 
         object.addEventListener('click',createRipple);
+        object.id = child.key;
         span.addEventListener('click',cancelPropagation);
-        span.addEventListener('click',function(){ selectedData = i; fillPopupFields(); });
+        span.addEventListener('click',function(){ selectedData = child; ItemSelectedID = child.key; fillPopupFields(); });
         span.addEventListener('click',function(){togglePopup(popupEdit);});
         object.appendChild(span);
         originalChilds.push(object);
         root.appendChild(object);
-    }
+    });
 }
-
 //POPUP
 function togglePopup(element){
     let name = "popup-in";
@@ -117,8 +114,8 @@ function fillPopupFields(){
     let collectionName = document.getElementById("name-field-edit");
     let collectionLength = document.getElementById("collection-number-field-edit");
 
-    collectionName.value = data[selectedData].Name;
-    collectionLength.value = data[selectedData].Data.length;
+    collectionName.value = selectedData.val().name;
+    collectionLength.value = selectedData.val().data.length;
 }
 function clearInput(popupform){
     for (let i = 0; i < popupform.childNodes.length; i++) {
@@ -132,19 +129,20 @@ function addManga(){
     var length = document.getElementById("collection-number-field").value;
     
     
-    const mangalist = ref(db, 'users/'+ profile);
+    const mangalist = ref(db, 'users/'+ profile+"/data/");
     let dataL = parseInt(length)+1;
     const postData = {
-        Name: name,
-        Data: Array(dataL).join("0")
+        name: name,
+        data: Array(dataL).join("0")
     };
-    
     onValue(mangalist, (snapshot) => {
-        let key = snapshot.val().length;
+        let key = push(ref(db, 'users/'+ profile)).key;
         updateData(mangalist,postData,key);
+        // drawData(snapshot);
     }, {
         onlyOnce: true
     });
+    
     togglePopup(popup);
 }
 
@@ -153,20 +151,30 @@ function updateData(ref,new_data,key){
     
     let updatedData = [];
     updatedData[1] = new_data;
-    data.push(new_data);
-    updates["/"+key] = new_data; 
+    // data.push(new_data);
+    updates[key] = new_data; 
     update(ref,updates);
-    
-    drawData(updatedData);
+
+    const snapshot = {
+        child: {
+            key: key,
+            val(){
+                return new_data;
+            }
+        },
+        forEach(action) {
+               action(this.child);
+        }
+    }
+    drawData(snapshot);
 }
 
 function editManga(newName, newDataLen){
-    let sel = data[selectedData];
     if(newName == null ) return;
     if(newDataLen == NaN ) return;
-    let newData = sel.Data;
+    let newData = selectedData.val().data;
 
-    if(newDataLen > sel.Data.length){
+    if(newDataLen > newData.length){
       newData += Array(newDataLen-newData.length+1).join("0");
     }else{
       newData = newData.substring(0,newDataLen);
@@ -174,8 +182,8 @@ function editManga(newName, newDataLen){
     editData(newName,newData);
 
     let selected = newData.split("1").length - 1;
-    let total = newData.length;       
-    var listItem = originalChilds[selectedData-1];
+    let total = newData.length;
+    var listItem = document.getElementById(ItemSelectedID);
     var spanChild = listItem.childNodes[1]; 
     listItem.textContent = newName;
     listItem.appendChild(spanChild);
@@ -184,19 +192,18 @@ function editManga(newName, newDataLen){
 }
 
 function deleteManga(){
-    editData("",null);
-    var child = originalChilds[selectedData-1];
-    child.parentNode.removeChild(child);
+    editData(null,null);
+    document.getElementById(ItemSelectedID).remove();
 }
 
-function editData(Name, Data){
+function editData(name, data){
     let updates = {
-        Name: Name,
-        Data: Data
+        name: name,
+        data: data
     };
-    update(ref(db, 'users/'+ profile + "/" + (selectedData)),updates);
+    update(ref(db, 'users/'+ profile + "/data/" + selectedData.key),updates);
     togglePopup(popupEdit);
-    data[selectedData] = updates;
+    // data[selectedData] = updates;
 }
 
 function cancelPropagation(e){
