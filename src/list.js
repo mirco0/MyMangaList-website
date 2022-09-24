@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
 import { getDatabase, ref, onValue, push, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
-
 document.getElementById("logo").onclick = function(){
     window.location.href = "index.html";
 }
@@ -17,7 +16,7 @@ const db = getDatabase(firebaseConfig);
 
 var profile = "SETID";//window.location.hash.substring(1);
 let originalChilds = [];
-var data; 
+var dataMap = new Map();
 var selectedData;
 let ItemSelectedID;
 
@@ -49,12 +48,10 @@ popupformEdit.addEventListener("click",cancelPropagation);
 deleteButton.addEventListener("click",deleteManga);
 
 function getData(user){
-    console.log("DIOCANE");
     const mangalist = ref(db, 'users/'+user+"/data");
     onValue(mangalist, (snapshot) => {
         const dataOrigin = snapshot;
         if(dataOrigin){
-            data = dataOrigin;
             drawData(snapshot);
         }else{
             console.log("Page not found");
@@ -87,13 +84,13 @@ function drawData(snapshot){
 
         object.className = "list-item"
         object.addEventListener('click', function(){
-            saveData(child.val().data,child.key);
+            saveData(dataMap.get(child.key).val().data,child.key);
         });
-
+        dataMap.set(child.key,child);
         object.addEventListener('click',createRipple);
         object.id = child.key;
         span.addEventListener('click',cancelPropagation);
-        span.addEventListener('click',function(){ selectedData = child; ItemSelectedID = child.key; fillPopupFields(); });
+        span.addEventListener('click',function(){ selectedData = dataMap.get(child.key); ItemSelectedID = child.key; fillPopupFields(); });
         span.addEventListener('click',function(){togglePopup(popupEdit);});
         object.appendChild(span);
         originalChilds.push(object);
@@ -114,8 +111,9 @@ function fillPopupFields(){
     let collectionName = document.getElementById("name-field-edit");
     let collectionLength = document.getElementById("collection-number-field-edit");
 
-    collectionName.value = selectedData.val().name;
-    collectionLength.value = selectedData.val().data.length;
+    console.log(dataMap.get(ItemSelectedID));
+    collectionName.value = dataMap.get(ItemSelectedID).val().name;
+    collectionLength.value =  dataMap.get(ItemSelectedID).val().data.length;
 }
 function clearInput(popupform){
     for (let i = 0; i < popupform.childNodes.length; i++) {
@@ -138,7 +136,6 @@ function addManga(){
     onValue(mangalist, (snapshot) => {
         let key = push(ref(db, 'users/'+ profile)).key;
         updateData(mangalist,postData,key);
-        // drawData(snapshot);
     }, {
         onlyOnce: true
     });
@@ -151,7 +148,6 @@ function updateData(ref,new_data,key){
     
     let updatedData = [];
     updatedData[1] = new_data;
-    // data.push(new_data);
     updates[key] = new_data; 
     update(ref,updates);
 
@@ -163,7 +159,7 @@ function updateData(ref,new_data,key){
             }
         },
         forEach(action) {
-               action(this.child);
+            action(this.child);
         }
     }
     drawData(snapshot);
@@ -172,6 +168,7 @@ function updateData(ref,new_data,key){
 function editManga(newName, newDataLen){
     if(newName == null ) return;
     if(newDataLen == NaN ) return;
+    console.log(selectedData);
     let newData = selectedData.val().data;
 
     if(newDataLen > newData.length){
@@ -179,6 +176,7 @@ function editManga(newName, newDataLen){
     }else{
       newData = newData.substring(0,newDataLen);
     }
+    console.log("SLOM;DSL");
     editData(newName,newData);
 
     let selected = newData.split("1").length - 1;
@@ -203,7 +201,18 @@ function editData(name, data){
     };
     update(ref(db, 'users/'+ profile + "/data/" + selectedData.key),updates);
     togglePopup(popupEdit);
-    // data[selectedData] = updates;
+    const snapshot = {
+        child: {
+            key: selectedData.key,
+            val(){
+                return updates;
+            }
+        },
+        forEach(action) {
+            action(this.child);
+        }
+    }
+    dataMap.set(selectedData.key,snapshot.child);
 }
 
 function cancelPropagation(e){
