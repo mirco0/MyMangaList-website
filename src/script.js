@@ -12,8 +12,9 @@ window.onclick = checkforsave;
 
 let data = [];
 let dataOrigin = [];
-
+var id;
 function init(){
+    id = isLoggedIn();
     initUI();
     loadData();
     generateTable(data.length);
@@ -33,14 +34,7 @@ function loadData(){
 }
 
 function saveData(){
-  if(local()){
-    id = localStorage.getItem("user");
-  }else{
-    id = getCookie("user");
-  }
-  //TO REMOVE
-  id = "SETID";
-    putData(id,data);
+  putData(data);
   dataOrigin = [...data];
   console.log("tried to save");
 }

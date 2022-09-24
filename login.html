@@ -5,23 +5,24 @@
         <link rel="icon" href="/assets/icon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     </head>
+    <script type="module" src="src/firebase.js"></script>
     <link rel="stylesheet" href="styles/list.css">
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/login.css">
-    <script src="src/login.js"></script>
+    <script type="module" src="src/login.js"></script>
     <body>
         <div class="actionbar">
             <p class="logo" id="logo">MyMangaList</p>
             <p class="profile-picture" id="profile-picture"></p>
             <p class="login" id="login">LOG IN</p> 
         </div>
-            <form class="container" onSubmit=" return login();">
+            <form class="container" id="form" onsubmit="return false;">
                 <div class="input">
                     <label for="email"><b>Email</b></label>
                     <input type="text" class="input-prompt" name="email" required>
 
                     <label for="psw"><b>Password</b></label>
-                    <input type="password" class="input-prompt name="psw" required>
+                    <input type="password" class="input-prompt" name="psw" required>
                 </div>
 
                 <button type="submit" onsubmit="login()">LOG IN</button>

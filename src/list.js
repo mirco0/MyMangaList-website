@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
 import { getDatabase, ref, onValue, push, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 document.getElementById("logo").onclick = function(){
     window.location.href = "index.html";
 }
@@ -12,9 +13,20 @@ const firebaseConfig = initializeApp({
     messagingSenderId: "238759107728",
     appId: "1:238759107728:web:f4cf218ec3ae11265e8c15"
 });
+const auth = getAuth(firebaseConfig);
 const db = getDatabase(firebaseConfig);
 
-var profile = "SETID";//window.location.hash.substring(1);
+let profile;
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const uid = user.uid;
+        profile = uid;
+        getData(profile);
+    } else {
+        window.location.href = "login.html";
+    }
+});
+
 let originalChilds = [];
 var dataMap = new Map();
 var selectedData;
@@ -29,8 +41,6 @@ let popupEdit = document.getElementById("popup-edit");
 let popupformEdit = document.getElementById("popup-form-edit");
 let formEdit = document.getElementById("form-edit");
 let deleteButton = document.getElementById("form-delete-edit");
-
-getData(profile);
 
 form_add.addEventListener("click",addManga);
 add_button.addEventListener("click", createRipple);

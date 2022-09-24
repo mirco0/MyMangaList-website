@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
 import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
 const firebaseConfig = initializeApp({
     apiKey: "AIzaSyCQro-kkRNm58eDJeJgSea3gTj6Q__QzxM",
@@ -11,8 +12,22 @@ const firebaseConfig = initializeApp({
 });
 
 const db = getDatabase(firebaseConfig);
+const auth = getAuth(firebaseConfig);
+let id;
+window.isLoggedIn = function isLoggedIn(){
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const uid = user.uid;
+            id = uid;
+            return uid;
+        } else {
+            window.location.href = "login.html";
+            return false;
+        }
+    });
+}
 
-window.putData = function putData(id, data){
+window.putData = function putData(data){
     const key = sessionStorage.getItem("key");
     const updates = {};
     let formattedData = data.toString().replaceAll(",","");
