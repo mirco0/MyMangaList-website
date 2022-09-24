@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MyMangaList</title>
+        <link rel="icon" href="/assets/icon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    </head>
+    <link rel="stylesheet" href="styles/list.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/login.css">
+    <script src="src/login.js"></script>
+    <body>
+        <div class="actionbar">
+            <p class="logo" id="logo">MyMangaList</p>
+            <p class="profile-picture" id="profile-picture"></p>
+            <p class="login" id="login">LOG IN</p> 
+        </div>
+            <form class="container" onSubmit=" return login();">
+                <div class="input">
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" class="input-prompt" name="email" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" class="input-prompt name="psw" required>
+                </div>
+
+                <button type="submit" onsubmit="login()">LOG IN</button>
+                <p class="p">I don’t have an account yet <span>create one</span>.</p>
+
+            </form>
+    </body>
+</html>
