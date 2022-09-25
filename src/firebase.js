@@ -19,7 +19,7 @@ window.isLoggedIn = function isLoggedIn(){
         if (user) {
             const uid = user.uid;
             id = uid;
-            return uid;
+            return true;
         } else {
             window.location.href = "login.html";
             return false;

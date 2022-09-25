@@ -12,9 +12,8 @@ window.onclick = checkforsave;
 
 let data = [];
 let dataOrigin = [];
-var id;
 function init(){
-    id = isLoggedIn();
+    isLoggedIn();
     initUI();
     loadData();
     generateTable(data.length);
@@ -22,7 +21,7 @@ function init(){
 
 function initUI(){
   var title = window.location.hash.substring(1);
-  document.getElementById("title").textContent = title.replaceAll("%20"," ");
+  document.getElementById("title").textContent = decodeURI(title);
 }
 
 function loadData(){

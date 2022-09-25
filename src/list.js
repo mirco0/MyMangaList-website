@@ -72,10 +72,10 @@ function getData(user){
 }
 
 //DATA
-function saveData(data,key){
+function saveData(data,key,title){
     sessionStorage.setItem("data",data);
     sessionStorage.setItem("key",key);
-    setTimeout(() => { window.location.href = 'mangalist.html' + '#' }, 150);
+    setTimeout(() => { window.location.href = 'mangalist.html' + '#' + encodeURI(title) }, 150);
 }
 
 function drawData(snapshot){
@@ -92,11 +92,11 @@ function drawData(snapshot){
         span.innerHTML = selected+"/"+total;
         span.className = "counter";
 
+        dataMap.set(child.key,child);
         object.className = "list-item"
         object.addEventListener('click', function(){
-            saveData(dataMap.get(child.key).val().data,child.key);
+            saveData(dataMap.get(child.key).val().data,child.key,dataMap.get(child.key).val().name);
         });
-        dataMap.set(child.key,child);
         object.addEventListener('click',createRipple);
         object.id = child.key;
         span.addEventListener('click',cancelPropagation);
