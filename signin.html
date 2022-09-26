@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MyMangaList</title>
+        <link rel="icon" href="/assets/icon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    </head>
+    <script type="module" src="src/firebase.js"></script>
+    <link rel="stylesheet" href="styles/list.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/loader.css">
+    <script type="module" src="src/signin.js"></script>
+    <body>
+        <div class="actionbar">
+            <p class="logo" id="logo">MyMangaList</p>
+            <p class="profile-picture" id="profile-picture"></p>
+            <p class="login" id="login">SIGN IN</p> 
+        </div>
+            <form class="container" id="form" onsubmit="return false;">
+                <div class="input">
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" class="input-prompt" name="email" required>
+                    
+                    <label for="name"><b>Name</b></label>
+                    <input type="text" class="input-prompt" name="name" required>
+                    
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" class="input-prompt" name="psw" required>
+                
+                    <label for="psw2"><b>Confirm Password</b></label>
+                    <input type="password" class="input-prompt" name="psw2" required>
+                
+                </div>
+
+                <button type="submit" onsubmit="signin()"id="button-login">
+                    <div class="loader" id="loader">
+                        <svg class="circular-loader" viewBox="25 25 50 50">
+                            <circle class="loader-path" cx="50" cy="50" r="20" fill="none"></circle>
+                        </svg>
+                    </div>
+                    SIGN IN
+                </button>
+                <p class="error" id="error"></p>
+
+            </form>
+    </body>
+</html>
