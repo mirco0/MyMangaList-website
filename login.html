@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/list.css">
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/loader.css">
     <script type="module" src="src/login.js"></script>
     <body>
         <div class="actionbar">
@@ -25,8 +26,16 @@
                     <input type="password" class="input-prompt" name="psw" required>
                 </div>
 
-                <button type="submit" onsubmit="login()">LOG IN</button>
-                <p class="p">I don’t have an account yet <span>create one</span>.</p>
+                <button type="submit" onsubmit="login()"id="button-login">
+                    <div class="loader" id="loader">
+                        <svg class="circular-loader" viewBox="25 25 50 50">
+                            <circle class="loader-path" cx="50" cy="50" r="20" fill="none"></circle>
+                        </svg>
+                    </div>
+                    LOG IN
+                </button>
+                <p class="error" id="error"></p>
+                <p class="p">I don’t have an account yet <span id="create">create one</span>.</p>
 
             </form>
     </body>

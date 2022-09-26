@@ -1,0 +1,41 @@
+.loader {
+    display: none;
+    height: 100%;
+    aspect-ratio: 1/1;
+    margin: auto;
+}
+.loader-path {
+    fill: none;
+    stroke: rgb(255, 255, 255);
+    stroke-width: 6px;
+    stroke-linecap: square;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.circular-loader {
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124;
+    }
+}
+
+.loader-path {
+    animation: animate 1.5s ease-in-out infinite;
+}
