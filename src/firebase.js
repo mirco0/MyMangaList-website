@@ -14,15 +14,16 @@ const firebaseConfig = initializeApp({
 const db = getDatabase(firebaseConfig);
 const auth = getAuth(firebaseConfig);
 let id;
-window.isLoggedIn = function isLoggedIn(){
+window.isLoggedIn = function isLoggedIn(action){
     onAuthStateChanged(auth, (user) => {
         if (user) {
             const uid = user.uid;
             id = uid;
-            return true;
+            if(action)
+                action();
         } else {
-            window.location.href = "login.html";
-            return false;
+            if(!action)
+                window.location.href = "login.html";
         }
     });
 }
@@ -34,4 +35,8 @@ window.putData = function putData(data){
     updates['users/'+id+'/data/'+ key + '/data'] = formattedData;
     update(ref(db), updates);
     sessionStorage.setItem("data",formattedData);
+}
+
+window.logOut = function logOut(){
+    auth.signOut();
 }
