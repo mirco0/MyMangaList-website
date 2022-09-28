@@ -106,6 +106,7 @@ function drawData(snapshot){
         originalChilds.push(object);
         root.appendChild(object);
     });
+    animate(false);
 }
 //POPUP
 function togglePopup(element){
@@ -228,3 +229,12 @@ function editData(name, data){
 function cancelPropagation(e){
     e.stopPropagation();
 }
+
+function animate(animating){
+    let loader = document.getElementById("loader");    
+    if(animating){
+      loader.style.display = "block";
+    }else{
+      loader.style.display = "none";
+    }
+  }

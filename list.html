@@ -7,6 +7,7 @@
   </head>
   <link rel="stylesheet" href="styles/list.css">
   <link rel="stylesheet" href="styles/add-popup.css">
+  <link rel="stylesheet" href="styles/loader.css">
   <script type="module" src="src/list.js"></script>
   <script src="src/ripple.js"></script>
   <body>
@@ -15,29 +16,35 @@
       <p class="add-button" id="add-button">+</p>
       <p class="profile-picture" id="profile-picture"></p>
     </div>
-    <div class="manga-container" id="list"></div>
+    <div class="manga-container" id="list">
+      <div class="loader-small" id="loader">
+        <svg class="circular-loader" viewBox="25 25 50 50">
+            <circle class="loader-path" cx="50" cy="50" r="20" fill="none"></circle>
+        </svg>
+      </div>
+    </div>
     <div class="popup-out" id="popup">
       <form autocomplete="off" class="popup" id="popup-form" >
-        <label class="title">Aggiungi collezione</label>
+        <label class="title">Add collection</label>
         <br>
-        <input type="text" name="name" id="name-field" class="input-field" placeholder="Aggiungi un nome">
+        <input type="text" name="name" id="name-field" class="input-field" placeholder="Add a name">
         <br>
-        <input type="number" name="number" id="collection-number-field"  class="input-field" placeholder="Numero di volumi">
+        <input type="number" name="number" id="collection-number-field"  class="input-field" placeholder="Volume number">
         <br>
-        <input type="button" value="AGGIUNGI" id="add-form" class="form-button add-form-button" >
+        <input type="button" value="ADD" id="add-form" class="form-button add-form-button" >
       </form>  
     </div>
     <div class="popup-out" id="popup-edit">
       <form autocomplete="off" class="popup" id="popup-form-edit" >
-        <label class="title">Modifica collezione</label>
+        <label class="title">Edit Collection</label>
         <br>
-        <input type="text" name="name" id="name-field-edit" class="input-field" placeholder="Aggiungi un nome">
+        <input type="text" name="name" id="name-field-edit" class="input-field" placeholder="Add a name">
         <br>
-        <input type="number" name="number" id="collection-number-field-edit"  class="input-field" placeholder="Numero di volumi">
+        <input type="number" name="number" id="collection-number-field-edit"  class="input-field" placeholder="Volume number">
         <br>
-        <input type="button" value="ELIMINA" id="form-delete-edit" class="form-button delete-form-button">
+        <input type="button" value="DELETE" id="form-delete-edit" class="form-button delete-form-button">
         <br>
-        <input type="button" value="MODIFICA" id="form-edit" class="form-button add-form-button">
+        <input type="button" value="EDIT" id="form-edit" class="form-button add-form-button">
       </form>  
     </div>
   </body>

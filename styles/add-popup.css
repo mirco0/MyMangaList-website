@@ -33,6 +33,10 @@
 
 .popup{
     position: absolute;
+    
+    display: flex;
+    flex-direction: column;
+    
     left: 0;
     right:  0;
 
@@ -48,6 +52,7 @@
     max-height: 500px;
     max-width: 500px;
     background-color: var(--item_background_dark);
+    font-weight: 700;
     border-radius: 20px;
     text-align: center;
     font-family: Roboto;
@@ -62,7 +67,6 @@
 
 .title{
 
-    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,31 +82,35 @@
 }
 
 .input-field{
-    all: unset; 
-    display: flex;
-    position: relative;
-    top: 17.8%;
-    right: 0;
-    left:  0;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    border-radius: 4px;
-    background-color: var(--light_gray);
-    height: 14.3%;
-    width: 71.5%;
+
+    all: unset;
+    align-self: center;
+    margin-top: 5px;
+    width: 90%;
+    height: 3em;
+    font-family: 'Roboto';
+    box-sizing: border-box;
+    color: white;
+    padding: 4px;
+    padding-left: 10px;
+    border: 1px solid var(--unselected_dark);;
+    border-radius: 5px;
+    background-color: var(--unselected_dark);
     font-size: calc(var(--vw) * 3.5);
+}
+
+.input-field:focus{
+    border: 1px solid white;
 }
 .form-button{
     all: unset;
-    position: absolute;
     right: 0;
     left:  0;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     font-family: Roboto;
     font-weight: bold;
     color: #E6E6E6;
+    border: 1px solid rgba(0, 0, 0, 0);
     cursor: pointer;
     border-radius: 8px;
 }
@@ -111,11 +119,11 @@
     height: 21.4%;
     width: 60.7%;
     bottom: 7.15%;
+    margin-bottom: 15px;
     font-size: calc(var(--vw) * 4.5);
     
     background-color: #BB86FC;
 }
-
 .delete-form-button{
     height: 10.7%;
     width: 30.35%;
@@ -125,13 +133,15 @@
 }
 
 .form-button:hover{
-    opacity: 0.9;
+    opacity: 0.8;
     box-shadow: 0px 10px 5px #222222;
 }
 
 .form-button:focus{
     opacity: 1;
     box-shadow: 0px 10px 5px #222222;
+    border: 1px solid rgb(0, 0, 0);
+    outline: #ddd solid 2px;
 }
 
 .non-scrollable{

@@ -4,6 +4,13 @@
     aspect-ratio: 1/1;
     margin: auto;
 }
+.loader-small{
+    display: block;
+    height: 60px;
+    aspect-ratio: 1/1;
+    margin: auto;
+    margin-top: 10px;
+}
 .loader-path {
     fill: none;
     stroke: rgb(255, 255, 255);
