@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase
 import { getDatabase, ref, onValue, push, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
 import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 document.getElementById("logo").onclick = function(){
-    window.location.href = "index.html";
+    window.location.href = "index";
 }
 
 const firebaseConfig = initializeApp({
@@ -23,7 +23,7 @@ onAuthStateChanged(auth, (user) => {
         profile = uid;
         getData(profile);
     } else {
-        window.location.href = "login.html";
+        window.location.href = "login";
     }
 });
 
@@ -75,7 +75,7 @@ function getData(user){
 function saveData(data,key,title){
     sessionStorage.setItem("data",data);
     sessionStorage.setItem("key",key);
-    setTimeout(() => { window.location.href = 'mangalist.html' + '#' + encodeURI(title) }, 150);
+    setTimeout(() => { window.location.href = 'mangalist' + '#' + encodeURI(title) }, 150);
 }
 
 function drawData(snapshot){

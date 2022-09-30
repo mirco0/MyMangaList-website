@@ -11,5 +11,5 @@ function showProfilePicture(){
     login.style.visibility = "hidden";
 }
 function loadLoginPage(){
-    window.location.href = "login.html";
+    window.location.href = "login";
 }

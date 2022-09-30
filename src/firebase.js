@@ -23,7 +23,7 @@ window.isLoggedIn = function isLoggedIn(action){
                 action();
         } else {
             if(!action)
-                window.location.href = "login.html";
+                window.location.href = "login";
         }
     });
 }
