@@ -1,12 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword , onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 import { errors } from "./errors.js";
 
 document.getElementById("logo").onclick = function(){
-    window.location.href = "index.html";
+    window.location.href = "index";
 }
 document.getElementById("create").onclick = function(){
-  window.location.href = "signin.html"
+  window.location.href = "signin"
 };
 document.getElementById("form").onsubmit = function(){ return login(this.elements["email"].value,this.elements["psw"].value);}
 const firebaseConfig = initializeApp({
@@ -19,13 +19,18 @@ const firebaseConfig = initializeApp({
 });
 const auth = getAuth(firebaseConfig);
 
+onAuthStateChanged(auth, (user) => {
+  if (user) 
+    window.location.href = "list";
+});
+
 function login(email,password){
     animate(true);
     setError("");
     signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
         const user = userCredential.user;
         console.log(user.uid);
-        window.location.href = "list.html";
+        window.location.href = "list";
         animate(false);
         return true;
       })
