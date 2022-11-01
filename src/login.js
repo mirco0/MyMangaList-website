@@ -2,12 +2,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase
 import { getAuth, signInWithEmailAndPassword , onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 import { errors } from "./errors.js";
 
-document.getElementById("logo").onclick = function(){
-    window.location.href = "index";
-}
-document.getElementById("create").onclick = function(){
-  window.location.href = "signin"
-};
 document.getElementById("form").onsubmit = function(){ return login(this.elements["email"].value,this.elements["psw"].value);}
 const firebaseConfig = initializeApp({
     apiKey: "AIzaSyCQro-kkRNm58eDJeJgSea3gTj6Q__QzxM",

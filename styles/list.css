@@ -46,6 +46,7 @@ body {
     user-select: none;
 }
 .logo{
+    color: var(--textColor_dark);
     font-weight: bold;
     cursor: pointer;
     -webkit-touch-callout: none;
@@ -122,4 +123,8 @@ span.ripple{
 }
 .counter:hover{
     color: var(--selected_dark);
+}
+
+a{
+    text-decoration: none;
 }

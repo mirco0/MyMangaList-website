@@ -10,6 +10,3 @@ function showProfilePicture(){
     profilePic.style.visibility = "visible";
     login.style.visibility = "hidden";
 }
-function loadLoginPage(){
-    window.location.href = "login";
-}

@@ -1,9 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
 import { getDatabase, ref, onValue, push, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
 import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-document.getElementById("logo").onclick = function(){
-    window.location.href = "index";
-}
 
 const firebaseConfig = initializeApp({
     apiKey: "AIzaSyCQro-kkRNm58eDJeJgSea3gTj6Q__QzxM",
